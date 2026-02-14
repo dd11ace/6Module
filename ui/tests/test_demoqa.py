@@ -2,6 +2,10 @@ import time
 from datetime import datetime
 from playwright.sync_api import Page, expect
 from constants import (
+    DEMOQA_CHECKBOX_LINK,
+    DEMOQA_ELEMENTS_LINK,
+    DEMOQA_MAIN_LINK,
+    DEMOQA_RADIO_BUTTONS_LINK,
     DEMOQA_REGISTRATION_FORM_LINK,
     DEMOQA_TEXT_BOX_LINK,
     DEMOQA_WEBTABLES_LINK,
@@ -99,3 +103,47 @@ def test_registration_form(page: Page):
     expect(page.get_by_text("Thanks for submitting the form")).to_be_visible()
 
     time.sleep(5)
+
+
+def test_radio_buttons(page: Page):
+    # Прямая ссылка временна недоступна
+    # Когда станет доступна раскоментировать код и удалить ниже помоченый
+    #
+    # page.goto(DEMOQA_RADIO_BUTTONS_LINK)
+    #
+    # УДАЛИТЬ --- НИЖЕ
+    page.goto(DEMOQA_MAIN_LINK)
+    page.get_by_role("link", name="Elements").click()
+    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
+    page.get_by_role("link", name="Radio Button").click()
+    page.wait_for_url(DEMOQA_RADIO_BUTTONS_LINK)
+    # УДАЛИТЬ --- ВЫШЕ
+
+    page.is_enabled("#yesRadio")
+    page.is_enabled("#impressiveRadio")
+    page.is_disabled("#noRadio")
+
+    time.sleep(3)
+
+
+def test_checkbox(page: Page):
+    # Прямая ссылка временна недоступна
+    # Когда станет доступна раскомментировать код и удалить ниже помоченый
+    #
+    # РАСКОММЕНТИРОВАТЬ
+    # page.goto(DEMOQA_CHECKBOX_LINK)
+    #
+    # УДАЛИТЬ --- НИЖЕ
+    page.goto(DEMOQA_MAIN_LINK)
+    page.get_by_role("link", name="Elements").click()
+    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
+    page.get_by_role("link", name="Check Box").click()
+    page.wait_for_url(DEMOQA_CHECKBOX_LINK)
+    # УДАЛИТЬ --- ВЫШЕ
+    page.get_by_role("treeitem", name="Select Home Home").is_visible()
+    page.get_by_role("treeitem", name="Select Desktop Desktop").is_hidden()
+
+    page.locator(".rc-tree-switcher").click()
+    page.get_by_role("treeitem", name="Select Desktop Desktop").is_visible()
+
+    time.sleep(3)
