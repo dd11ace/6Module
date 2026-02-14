@@ -59,22 +59,32 @@ def test_add_button_and_registration(page: Page):
 
 def test_registration_form(page: Page):
     page.goto(DEMOQA_REGISTRATION_FORM_LINK)
+
     today = datetime.now().strftime("%d %b %Y")
 
     page.get_by_role("textbox", name="First Name").fill("John")
     page.get_by_role("textbox", name="Last Name").fill("Doe")
     page.get_by_role("textbox", name="name@example.com").fill("example@example.com")
+
     page.get_by_role("radio", name="Male", exact=True).check(force=True)
     # page.check("gender-radio-1", force=True) Такой способ не работает
+
     page.get_by_role("textbox", name="Mobile Number").fill("1234567890")
+
     expect(page.locator("#dateOfBirthInput")).to_have_value(today)
+    date_of_birth = page.get_attribute("#dateOfBirthInput")
+    print(date_of_birth)
+
     page.locator("#subjectsInput").fill("English")
     expect(page.locator(".subjects-auto-complete__menu")).to_be_visible()
     page.locator("#react-select-2-option-0").click()
+
     page.get_by_role("checkbox", name="Sports").check(force=True)
     page.get_by_role("checkbox", name="Reading").check(force=True)
     page.get_by_role("checkbox", name="Music").check(force=True)
+
     page.get_by_role("textbox", name="Current Address").fill("Moscow, Mashkova 1")
+
     page.locator("#state").click()
     page.locator("#react-select-3-option-0").click()
     page.locator("#city").click()
@@ -86,6 +96,6 @@ def test_registration_form(page: Page):
 
     page.get_by_role("button", name="Submit").click()
 
-    expect(page.get_by_text("Thanks for submitting the form")).to_be_visible
+    expect(page.get_by_text("Thanks for submitting the form")).to_be_visible()
 
     time.sleep(5)

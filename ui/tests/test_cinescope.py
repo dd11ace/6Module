@@ -2,9 +2,11 @@ import time
 from random import randint
 from playwright.sync_api import Page, expect
 
+from constants import CINESCOPE_LOGIN_LINK, CINESCOPE_REGISTER_LINK
+
 
 def test_text_box(page: Page):
-    page.goto("https://dev-cinescope.coconutqa.ru/register")
+    page.goto(CINESCOPE_REGISTER_LINK)
 
     page.get_by_role("textbox", name="Имя Фамилия Отчество").fill(
         "Жмышенко Валерий Альбертович"
@@ -14,7 +16,7 @@ def test_text_box(page: Page):
 
 
 def test_registration(page: Page):
-    page.goto("https://dev-cinescope.coconutqa.ru/register")
+    page.goto(CINESCOPE_REGISTER_LINK)
 
     user_email = f"test_{randint(1, 9999)}@email.qa"
 
@@ -27,7 +29,7 @@ def test_registration(page: Page):
 
     page.get_by_role("button", name="Зарегистрироваться").click()
 
-    page.wait_for_url("https://dev-cinescope.coconutqa.ru/login")
+    page.wait_for_url(CINESCOPE_LOGIN_LINK)
     expect(page.get_by_text("Подтвердите свою почту")).to_be_visible()
 
     time.sleep(10)

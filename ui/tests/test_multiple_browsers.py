@@ -1,6 +1,8 @@
 import time
 from playwright.sync_api import sync_playwright
 
+from constants import EXAMPLE_LINK, GOOGLE_LINK
+
 
 def test_multiple_browsers():
     with sync_playwright() as p:
@@ -10,8 +12,8 @@ def test_multiple_browsers():
         chromium_page = chromium_browser.new_page()
         firefox_page = firefox_browser.new_page()
 
-        chromium_page.goto("https://www.example.com")
-        firefox_page.goto("https://www.google.com")
+        chromium_page.goto(EXAMPLE_LINK)
+        firefox_page.goto(GOOGLE_LINK)
 
         time.sleep(10)
 

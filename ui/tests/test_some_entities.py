@@ -1,6 +1,8 @@
 import time
 from playwright.sync_api import sync_playwright
 
+from constants import EXAMPLE_LINK, GOOGLE_LINK, WIKIPEDIA_LINK, YANDEX_LINK
+
 
 def test_some_entities():
     with sync_playwright() as p:
@@ -14,10 +16,10 @@ def test_some_entities():
         page1_2_1 = context1_2.new_page()
         page1_2_2 = context1_2.new_page()
 
-        page1_1_1.goto("https://www.example.com")
-        page1_1_2.goto("https://www.google.com")
-        page1_2_1.goto("https://www.wikipedia.org")
-        page1_2_2.goto("https://www.yandex.ru")
+        page1_1_1.goto(EXAMPLE_LINK)
+        page1_1_2.goto(GOOGLE_LINK)
+        page1_2_1.goto(WIKIPEDIA_LINK)
+        page1_2_2.goto(YANDEX_LINK)
 
         time.sleep(10)
 
