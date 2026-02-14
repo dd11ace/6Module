@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import Playwright, Browser, BrowserContext
+from common.tools import Tools
 from constants import DEFAULT_UI_TIMEOUT
 
 
@@ -16,6 +17,9 @@ def context(browser: Browser):
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
     context.set_default_timeout(DEFAULT_UI_TIMEOUT)
     yield context
+    log_name = f"trace_{Tools.get_timestamp()}.zip"
+    trace_path = Tools.files_dir("playwright_trace", log_name)
+    context.tracing.stop(path=trace_path)
     context.close()
 
 

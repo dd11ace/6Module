@@ -11,3 +11,4 @@ __pycache__/
 *.csv
 *.env
 allure-results/
+files/playwright_trace
