@@ -173,3 +173,29 @@ def test_dynamic_properties(page: Page):
     page.get_by_role("button", name="Will enable 5 Seconds").is_enabled()
 
     time.sleep(3)
+
+
+def test_expect(page: Page):
+    # Прямая ссылка временна недоступна
+    # Когда станет доступна раскоментировать код и удалить ниже помоченый
+    #
+    # page.goto(DEMOQA_RADIO_BUTTONS_LINK)
+    #
+    # УДАЛИТЬ --- НИЖЕ
+    page.goto(DEMOQA_MAIN_LINK)
+    page.get_by_role("link", name="Elements").click()
+    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
+    page.get_by_role("link", name="Radio Button").click()
+    page.wait_for_url(DEMOQA_RADIO_BUTTONS_LINK)
+    # УДАЛИТЬ --- ВЫШЕ
+    yes_radio = page.get_by_role("radio", name="Yes")
+    impressive_radio = page.get_by_role("radio", name="Impressive")
+    no_radio = page.get_by_role("radio", name="No")
+    expect(no_radio).to_be_disabled()
+    expect(yes_radio).to_be_enabled()
+    expect(impressive_radio).to_be_enabled()
+    page.locator('[for="yesRadio"]').click()
+    expect(yes_radio).to_be_checked()
+    expect(impressive_radio).not_to_be_checked()
+
+    time.sleep(3)
