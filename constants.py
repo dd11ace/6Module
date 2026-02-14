@@ -8,6 +8,7 @@ DEMOQA_TEXT_BOX_LINK = "https://demoqa.com/text-box"
 DEMOQA_WEBTABLES_LINK = "https://demoqa.com/webtables"
 DEMOQA_REGISTRATION_FORM_LINK = "https://demoqa.com/automation-practice-form"
 DEMOQA_RADIO_BUTTONS_LINK = "https://demoqa.com/radio-button"
+DEMOQA_DYNAMIC_PROPERTIES_LINK = "https://demoqa.com/dynamic-properties"
 
 # cinescope
 CINESCOPE_REGISTER_LINK = "https://dev-cinescope.coconutqa.ru/register"

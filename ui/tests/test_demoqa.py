@@ -3,6 +3,7 @@ from datetime import datetime
 from playwright.sync_api import Page, expect
 from constants import (
     DEMOQA_CHECKBOX_LINK,
+    DEMOQA_DYNAMIC_PROPERTIES_LINK,
     DEMOQA_ELEMENTS_LINK,
     DEMOQA_MAIN_LINK,
     DEMOQA_RADIO_BUTTONS_LINK,
@@ -145,5 +146,30 @@ def test_checkbox(page: Page):
 
     page.locator(".rc-tree-switcher").click()
     page.get_by_role("treeitem", name="Select Desktop Desktop").is_visible()
+
+    time.sleep(3)
+
+
+def test_dynamic_properties(page: Page):
+    # Прямая ссылка временна недоступна
+    # Когда станет доступна раскомментировать код и удалить ниже помоченый
+    #
+    # РАСКОММЕНТИРОВАТЬ
+    # page.goto(DEMOQA_DYNAMIC_PROPERTIES_LINK)
+    #
+    # УДАЛИТЬ --- НИЖЕ
+    page.goto(DEMOQA_MAIN_LINK)
+    page.get_by_role("link", name="Elements").click()
+    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
+    page.get_by_role("link", name="Dynamic Properties").click()
+    page.wait_for_url(DEMOQA_DYNAMIC_PROPERTIES_LINK)
+    # УДАЛИТЬ --- ВЫШЕ
+    expect(
+        page.get_by_role("button", name="Visible After 5 Seconds")
+    ).not_to_be_visible()
+    page.get_by_role("button", name="Will enable 5 Seconds").is_disabled()
+    page.wait_for_selector("#visibleAfter")
+    page.get_by_role("button", name="Visible After 5 Seconds").is_visible()
+    page.get_by_role("button", name="Will enable 5 Seconds").is_enabled()
 
     time.sleep(3)
