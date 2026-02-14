@@ -4,8 +4,6 @@ from playwright.sync_api import Page, expect
 from constants import (
     DEMOQA_CHECKBOX_LINK,
     DEMOQA_DYNAMIC_PROPERTIES_LINK,
-    DEMOQA_ELEMENTS_LINK,
-    DEMOQA_MAIN_LINK,
     DEMOQA_RADIO_BUTTONS_LINK,
     DEMOQA_REGISTRATION_FORM_LINK,
     DEMOQA_TEXT_BOX_LINK,
@@ -72,7 +70,7 @@ def test_registration_form(page: Page):
     page.get_by_role("textbox", name="name@example.com").fill("example@example.com")
 
     page.get_by_role("radio", name="Male", exact=True).check(force=True)
-    # page.check("gender-radio-1", force=True) Такой способ не работает
+    page.locator('[for="gender-radio-1"]').click()
 
     page.get_by_role("textbox", name="Mobile Number").fill("1234567890")
 
@@ -84,9 +82,9 @@ def test_registration_form(page: Page):
     expect(page.locator(".subjects-auto-complete__menu")).to_be_visible()
     page.locator("#react-select-2-option-0").click()
 
-    page.get_by_role("checkbox", name="Sports").check(force=True)
-    page.get_by_role("checkbox", name="Reading").check(force=True)
-    page.get_by_role("checkbox", name="Music").check(force=True)
+    page.locator('[for="hobbies-checkbox-1"]').click()
+    page.locator('[for="hobbies-checkbox-2"]').click()
+    page.locator('[for="hobbies-checkbox-3"]').click()
 
     page.get_by_role("textbox", name="Current Address").fill("Moscow, Mashkova 1")
 
@@ -107,18 +105,7 @@ def test_registration_form(page: Page):
 
 
 def test_radio_buttons(page: Page):
-    # Прямая ссылка временна недоступна
-    # Когда станет доступна раскоментировать код и удалить ниже помоченый
-    #
-    # page.goto(DEMOQA_RADIO_BUTTONS_LINK)
-    #
-    # УДАЛИТЬ --- НИЖЕ
-    page.goto(DEMOQA_MAIN_LINK)
-    page.get_by_role("link", name="Elements").click()
-    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
-    page.get_by_role("link", name="Radio Button").click()
-    page.wait_for_url(DEMOQA_RADIO_BUTTONS_LINK)
-    # УДАЛИТЬ --- ВЫШЕ
+    page.goto(DEMOQA_RADIO_BUTTONS_LINK)
 
     page.is_enabled("#yesRadio")
     page.is_enabled("#impressiveRadio")
@@ -128,19 +115,8 @@ def test_radio_buttons(page: Page):
 
 
 def test_checkbox(page: Page):
-    # Прямая ссылка временна недоступна
-    # Когда станет доступна раскомментировать код и удалить ниже помоченый
-    #
-    # РАСКОММЕНТИРОВАТЬ
-    # page.goto(DEMOQA_CHECKBOX_LINK)
-    #
-    # УДАЛИТЬ --- НИЖЕ
-    page.goto(DEMOQA_MAIN_LINK)
-    page.get_by_role("link", name="Elements").click()
-    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
-    page.get_by_role("link", name="Check Box").click()
-    page.wait_for_url(DEMOQA_CHECKBOX_LINK)
-    # УДАЛИТЬ --- ВЫШЕ
+    page.goto(DEMOQA_CHECKBOX_LINK)
+
     page.get_by_role("treeitem", name="Select Home Home").is_visible()
     page.get_by_role("treeitem", name="Select Desktop Desktop").is_hidden()
 
@@ -151,19 +127,9 @@ def test_checkbox(page: Page):
 
 
 def test_dynamic_properties(page: Page):
-    # Прямая ссылка временна недоступна
-    # Когда станет доступна раскомментировать код и удалить ниже помоченый
-    #
-    # РАСКОММЕНТИРОВАТЬ
-    # page.goto(DEMOQA_DYNAMIC_PROPERTIES_LINK)
-    #
-    # УДАЛИТЬ --- НИЖЕ
-    page.goto(DEMOQA_MAIN_LINK)
-    page.get_by_role("link", name="Elements").click()
-    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
-    page.get_by_role("link", name="Dynamic Properties").click()
-    page.wait_for_url(DEMOQA_DYNAMIC_PROPERTIES_LINK)
-    # УДАЛИТЬ --- ВЫШЕ
+
+    page.goto(DEMOQA_DYNAMIC_PROPERTIES_LINK)
+
     expect(
         page.get_by_role("button", name="Visible After 5 Seconds")
     ).not_to_be_visible()
@@ -176,18 +142,8 @@ def test_dynamic_properties(page: Page):
 
 
 def test_expect(page: Page):
-    # Прямая ссылка временна недоступна
-    # Когда станет доступна раскоментировать код и удалить ниже помоченый
-    #
-    # page.goto(DEMOQA_RADIO_BUTTONS_LINK)
-    #
-    # УДАЛИТЬ --- НИЖЕ
-    page.goto(DEMOQA_MAIN_LINK)
-    page.get_by_role("link", name="Elements").click()
-    page.wait_for_url(DEMOQA_ELEMENTS_LINK)
-    page.get_by_role("link", name="Radio Button").click()
-    page.wait_for_url(DEMOQA_RADIO_BUTTONS_LINK)
-    # УДАЛИТЬ --- ВЫШЕ
+    page.goto(DEMOQA_RADIO_BUTTONS_LINK)
+
     yes_radio = page.get_by_role("radio", name="Yes")
     impressive_radio = page.get_by_role("radio", name="Impressive")
     no_radio = page.get_by_role("radio", name="No")
