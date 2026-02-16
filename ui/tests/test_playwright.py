@@ -42,7 +42,7 @@ class TestPlaywright:
 
             browser1.close()
 
-    def test_multiple_browsers():
+    def test_multiple_browsers(self):
         with sync_playwright() as p:
             chromium_browser = p.chromium.launch(headless=False)
             firefox_browser = p.firefox.launch(headless=False)

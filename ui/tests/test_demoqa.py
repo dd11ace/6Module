@@ -30,6 +30,7 @@ class TestDemoqa:
     @pytest.mark.regression
     @pytest.mark.smoke
     def test_text_box(self, page: Page):
+        """Позитивные UI тесты для Demoqa"""
         page.goto(DEMOQA_TEXT_BOX_LINK)
 
         with allure.step("Заполнение полей"):

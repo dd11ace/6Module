@@ -14,6 +14,8 @@ from constants import CINESCOPE_LOGIN_LINK, CINESCOPE_REGISTER_LINK
 @pytest.mark.ui
 @pytest.mark.positive
 class TestCinescope:
+    """Позитивные UI тесты для Cinescope"""
+
     @allure.feature("Тест функциональности text box")
     @allure.story("Пользователь может заполнить тестовое поле")
     @allure.severity(allure.severity_level.CRITICAL)
