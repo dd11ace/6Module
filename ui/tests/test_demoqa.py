@@ -169,6 +169,7 @@ class TestDemoqa:
     @allure.feature("Функциональность чекбоксов")
     @allure.story("Пользователь может взаимодействовать с чекбоксами")
     @allure.title("Проверка навигации в дереве чекбоксов")
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.regression
     def test_checkbox(self, page: Page):
         page.goto(DEMOQA_CHECKBOX_LINK)
