@@ -25,6 +25,7 @@ class TestCinescope:
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_text_box(self, page: Page):
+        """Тестирование поля ввода text box"""
         page.goto(CINESCOPE_REGISTER_LINK)
 
         with allure.step("Заполнение поля"):
@@ -42,6 +43,7 @@ class TestCinescope:
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_registration(self, page: Page):
+        """Тестирование регистрации пользователя"""
         page.goto(CINESCOPE_REGISTER_LINK)
 
         user_email = f"test_{randint(1, 9999)}@email.qa"

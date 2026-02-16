@@ -30,7 +30,7 @@ class TestDemoqa:
     @pytest.mark.regression
     @pytest.mark.smoke
     def test_text_box(self, page: Page):
-        """Позитивные UI тесты для Demoqa"""
+        """Тест поля ввода text box"""
         page.goto(DEMOQA_TEXT_BOX_LINK)
 
         with allure.step("Заполнение полей"):
@@ -66,6 +66,7 @@ class TestDemoqa:
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_web_table(self, page: Page):
+        """Тест веб-таблицы"""
         page.goto(DEMOQA_WEBTABLES_LINK)
 
         with allure.step("Открытие формы"):
@@ -105,6 +106,7 @@ class TestDemoqa:
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_registration_form(self, page: Page):
+        """Тест формы регистрации"""
         page.goto(DEMOQA_REGISTRATION_FORM_LINK)
 
         today = datetime.now().strftime("%d %b %Y")
@@ -157,6 +159,7 @@ class TestDemoqa:
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.normal
     def test_radio_buttons(self, page: Page):
+        """Тест радио кнопок"""
         page.goto(DEMOQA_RADIO_BUTTONS_LINK)
 
         with allure.step("Валидация состояний радио кнопок"):
@@ -172,6 +175,7 @@ class TestDemoqa:
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.regression
     def test_checkbox(self, page: Page):
+        """Тест чекбоксов"""
         page.goto(DEMOQA_CHECKBOX_LINK)
         with allure.step("Валидация начального состояния"):
             page.get_by_role("treeitem", name="Select Home Home").is_visible()
@@ -191,7 +195,7 @@ class TestDemoqa:
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_dynamic_properties(self, page: Page):
-
+        """Тест динамических элементов"""
         page.goto(DEMOQA_DYNAMIC_PROPERTIES_LINK)
         with allure.step("Валидация изначального состояния"):
             expect(
@@ -212,6 +216,7 @@ class TestDemoqa:
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.normal
     def test_expect(self, page: Page):
+        """Тест утверждений"""
         page.goto(DEMOQA_RADIO_BUTTONS_LINK)
         yes_radio = page.get_by_role("radio", name="Yes")
         impressive_radio = page.get_by_role("radio", name="Impressive")
